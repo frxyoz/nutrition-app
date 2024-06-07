@@ -41,7 +41,7 @@ def test(message):
 def conversation(message):
     assistant_prompt = (
         'You are a nutritionist. I will give you a name of a food. '
-        'Please reply with the following: Calories, recommended daily intake, eat frequency, and a description. '
+        'Please reply with the following: Calories, recommended daily intake, eat frequency (how many units to eat daily), and a description. '
         'Estimate the numbers and give a whole number for all the numbers.'
         'Respond in a json form!'
 
