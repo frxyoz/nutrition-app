@@ -17,13 +17,14 @@ def get_json_response(system_prompt, user_prompt):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",
+            response_format={ "type": "json_object" },
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
         )
         # Extract and parse JSON content
-        response_content = response.choices[0].message['content']
+        response_content = response.choices[0].message.content
         if response_content:
             return json.loads(response_content)  # Assuming response content is a valid JSON string
         else:
