@@ -10,21 +10,20 @@ CORS(app)
 load_dotenv()
 # Set up OpenAI API key
 client = OpenAI(
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 def get_json_response(system_prompt, user_prompt):
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo-0125",
-            response_format={ "type": "json_object" },
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
         )
         # Extract and parse JSON content
-        response_content = response.choices[0].message.content
+        response_content = response.choices[0].message['content']
         if response_content:
             return json.loads(response_content)  # Assuming response content is a valid JSON string
         else:
@@ -40,11 +39,28 @@ def test(message):
 @app.route('/convo/<message>', methods=['GET'])
 def conversation(message):
     assistant_prompt = (
-        'You are a nutritionist. I will give you a name of a food. '
-        'Please reply with the following: Calories, recommended daily intake, eat frequency (how many units to eat daily), and a description. '
-        'Estimate the numbers and give a whole number for all the numbers.'
-        'Respond in a json form!'
-
+        'You are a nutritionist. I will provide the name of a food item. '
+        'Please respond with a JSON object containing the following details:\n'
+        '- **Calories**: Estimated calories per serving (whole number).\n'
+        '- **RecommendedDailyIntake**: Recommended daily intake in grams (whole number).\n'
+        '- **EatFrequency**: Suggested frequency of consumption per day (whole number).\n'
+        '- **Description**: A brief description of the food item, including its nutritional benefits.\n'
+        '- **Nutrients**: A breakdown of major nutrients, including carbohydrates, proteins, fats, vitamins, and minerals.\n\n'
+        'Here is the format for your response:\n'
+        '{\n'
+        '  "FoodName": "<Food Name>",\n'
+        '  "Calories": "<Estimated Calories>",\n'
+        '  "RecommendedDailyIntake": "<Recommended Daily Intake in grams>",\n'
+        '  "EatFrequency": "<Suggested Frequency per day>",\n'
+        '  "Description": "<Brief Description>",\n'
+        '  "Nutrients": {\n'
+        '    "Carbohydrates": "<Amount in grams>",\n'
+        '    "Proteins": "<Amount in grams>",\n'
+        '    "Fats": "<Amount in grams>",\n'
+        '    "Vitamins": ["<List of Key Vitamins>"],\n'
+        '    "Minerals": ["<List of Key Minerals>"]\n'
+        '  }\n'
+        '}'
     )
     print(assistant_prompt)
     response_dict = get_json_response(assistant_prompt, message)
