@@ -14,7 +14,7 @@ Features
 
 Technology Stack
 	•	Frontend: Flutter (Dart)
-	•	Backend/API: OpenAI GPT, TensorFlow Lite
+	•	Backend/API: Flask (Python), OpenAI GPT, TensorFlow Lite
 	•	Database & Auth: Firebase (Firestore and Firebase Auth)
 	•	Platform: Android
 
