@@ -53,7 +53,7 @@ The backend is a Flask REST API that provides nutritional information for food i
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/frxyoz/nutrition-app.git
+   git clone <repository-url>
    cd nutrition-app
    ```
 
@@ -205,7 +205,7 @@ The frontend is a Flutter-based Android application that provides the user inter
 
 ### Prerequisites
 
-- Flutter SDK (latest stable version)
+- Flutter SDK (version 3.0.0 or higher recommended)
 - Android Studio or VS Code with Flutter extensions
 - Android SDK and emulator or physical Android device
 - Firebase project with Firestore and Authentication enabled
@@ -222,7 +222,8 @@ The frontend is a Flutter-based Android application that provides the user inter
 
 3. **Clone the frontend repository** (if separate):
    ```bash
-   # Replace with actual frontend repository URL
+   # Note: The Flutter frontend code is maintained in a separate repository.
+   # Contact the project maintainer or check the project organization for the frontend repository URL.
    git clone <frontend-repo-url>
    cd <frontend-directory>
    ```
@@ -300,11 +301,13 @@ The frontend is a Flutter-based Android application that provides the user inter
 - **Solution**: The Flask app already has CORS enabled via `Flask-Cors`. Ensure the frontend is making requests to the correct backend URL.
 
 **Problem**: Port 5000 already in use
-- **Solution**: Either stop the process using port 5000 or run the Flask app on a different port:
-  ```bash
-  python app.py --port 8080
+- **Solution**: Either stop the process using port 5000 or modify `app.py` to use a different port:
+  ```python
+  # In app.py, change the last line from:
+  app.run(host='0.0.0.0', port=5000, debug=True)
+  # To:
+  app.run(host='0.0.0.0', port=8080, debug=True)
   ```
-  Or modify `app.py` to use a different port.
 
 ### Frontend Issues
 
