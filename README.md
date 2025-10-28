@@ -56,6 +56,7 @@ The backend is a Flask REST API that provides nutritional information for food i
    git clone <repository-url>
    cd nutrition-app
    ```
+   > Replace `<repository-url>` with the actual URL of this repository.
 
 2. **Create a virtual environment** (recommended):
    ```bash
@@ -221,9 +222,11 @@ The frontend is a Flutter-based Android application that provides the user inter
    ```
 
 3. **Clone the frontend repository** (if separate):
+   
+   > Note: The Flutter frontend code is maintained in a separate repository.
+   > Contact the project maintainer or check the project organization for the frontend repository URL.
+   
    ```bash
-   # Note: The Flutter frontend code is maintained in a separate repository.
-   # Contact the project maintainer or check the project organization for the frontend repository URL.
    git clone <frontend-repo-url>
    cd <frontend-directory>
    ```
